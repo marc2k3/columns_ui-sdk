@@ -110,7 +110,6 @@ public:
     void get_child(t_size index, menu_node_ptr& p_out) const {}
 };
 
-#if _MSC_VER >= 1800
 /**
  * \brief Helper class to instantiate simple command menu nodes.
  */
@@ -144,7 +143,6 @@ private:
     uint32_t m_display_flags;
     std::function<void()> m_on_execute;
 };
-#endif
 
 /** \brief Class that collects menu_node_t objects */
 class NOVTABLE menu_hook_t {

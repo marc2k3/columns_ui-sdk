@@ -75,17 +75,12 @@ inline BOOL uGetLastErrorMessage(pfc::string_base& out)
     return uFormatMessage(GetLastError(), out);
 }
 
-DWORD uGetClassLong(HWND wnd, int index);
-DWORD uSetClassLong(HWND wnd, int index, long new_long);
-
 HWND uFindParentPopup(HWND wnd_child);
 
-#if (WINVER >= 0x0500)
 typedef MONITORINFOEXA uMONITORINFOEX, *uLPMONITORINFOEX;
 
 BOOL uGetMonitorInfo(HMONITOR monitor, LPMONITORINFO lpmi);
 HWND uRecursiveChildWindowFromPoint(HWND parent, POINT pt_parent); // pt_parent is in parent window coordinates!
-#endif
 
 namespace win32_helpers {
 void send_message_to_all_children(HWND wnd_parent, UINT msg, WPARAM wp, LPARAM lp);
@@ -94,17 +89,5 @@ int message_box(HWND wnd, const TCHAR* text, const TCHAR* caption, UINT type);
 BOOL tooltip_add_tool(HWND wnd, TOOLINFO* ti, bool update = false);
 }; // namespace win32_helpers
 
-// for compatibility only (namely fcs files)
-
-void convert_logfont_utf8_to_os(const uLOGFONT& p_src, LOGFONT& p_dst);
-void convert_logfont_os_to_utf8(const LOGFONT& p_src, uLOGFONT& p_dst);
-
-struct logfont_os_from_utf8 : public LOGFONT {
-    logfont_os_from_utf8(const uLOGFONT& p_logfont) { convert_logfont_utf8_to_os(p_logfont, *this); }
-};
-
-struct logfont_utf8_from_os : public uLOGFONT {
-    logfont_utf8_from_os(const LOGFONT& p_logfont) { convert_logfont_os_to_utf8(p_logfont, *this); }
-};
 
 #endif

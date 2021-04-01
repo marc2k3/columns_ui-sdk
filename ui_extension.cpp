@@ -1,10 +1,6 @@
 #include "ui_extension.h"
 
-#if (WINVER >= 0x0500)
 #define _GetParent(wnd) GetAncestor(wnd, GA_PARENT)
-#else
-#define _GetParent(wnd) GetParent(wnd)
-#endif
 
 // {5E283800-E682-4120-A1A8-D9CDADDC8956}
 const GUID uie::window_host::class_guid
